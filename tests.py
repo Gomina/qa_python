@@ -140,3 +140,8 @@ class TestBooksCollector:
 
         collector.delete_book_from_favorites('Ходячий замок')
         assert len(favorites) == 0
+
+    def test_get_book_genre(self, modified_books_genre):
+        collector = modified_books_genre
+        result = collector.get_book_genre('Книга белой смерти')
+        assert result == 'Ужасы'
