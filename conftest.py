@@ -12,4 +12,4 @@ def modified_books_genre():
         'Ходячий замок': 'Фантастика',
         'Легенды ночных стражей': None
     }
-    yield collector
+    return collector
