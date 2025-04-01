@@ -3,8 +3,7 @@ from main import BooksCollector
 
 class TestBooksCollector:
 
-    def test_add_new_book_add_two_books(self):
-        collector = BooksCollector()
+    def test_add_new_book_add_two_books(self, collector):
         collector.add_new_book('Гордость и предубеждение и зомби')
         collector.add_new_book('Что делать, если ваш кот хочет вас убить')
         assert len(collector.books_genre) == 2
@@ -25,15 +24,13 @@ class TestBooksCollector:
                                 ('Тайны бескрайних горизонтов: Путешествие в мечту-51', False)
                             ])
 
-    def test_add_new_book_with_different_title(self,name, expected_result):
-        collector = BooksCollector()
+    def test_add_new_book_with_different_title(self,collector, name, expected_result):
         collector.add_new_book(name)
         actual_result = len(collector.books_genre) > 0
         assert actual_result == expected_result
 
     # невозможно добавить книгу, если она уже есть в books_genre
-    def test_add_new_book_if_already_addad(self):
-        collector = BooksCollector()
+    def test_add_new_book_if_already_addad(self, collector):
         collector.add_new_book('Гордость и предубеждение и зомби')
         collector.add_new_book('Гордость и предубеждение и зомби')
         assert len(collector.books_genre) == 1
@@ -47,8 +44,7 @@ class TestBooksCollector:
                                  ('Кто, если не я', 'Мелодрама', False),
                              ])
 
-    def test_appropriation_of_genre(self, name, genre, expected_result):
-        collector = BooksCollector()
+    def test_appropriation_of_genre(self, collector, name, genre, expected_result):
         collector.books_genre = {'1+1': None}
         collector.set_book_genre(name, genre)
         actual_result = name in collector.books_genre and collector.books_genre[name] == genre
@@ -80,8 +76,7 @@ class TestBooksCollector:
         assert set(result) == {'Война миров', 'Ходячий замок'}
 
     #вывод текущего словаря
-    def test_dictionary_contents(self):
-        collector = BooksCollector()
+    def test_dictionary_contents(self, collector):
         collector.add_new_book('Гордость и предубеждение и зомби')
         collector.add_new_book('Что делать, если ваш кот хочет вас убить')
         books_genre = collector.get_books_genre()
@@ -107,8 +102,7 @@ class TestBooksCollector:
         assert set(favorites) == {'Чемодан', 'Война миров'}
 
     #удаление книг из избранного
-    def test_remove_from_favorites(self):
-        collector = BooksCollector()
+    def test_remove_from_favorites(self, collector):
         collector.favorites = ['Чемодан', 'Война миров', 'Книга белой смерти']
 
         collector.delete_book_from_favorites('Чемодан')
